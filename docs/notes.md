@@ -68,6 +68,13 @@ channel_host: "bluesky"
 ```
 It can handle multiple files and can be set up to monitor a folder and trigger a post for each. 
 
+## Check for Bluesky Alerts
+
+### Goal
+
+A simple command-line Python script that continuously monitors a folder for new files, and when one is found, it is posted to Bluesky.
+
+
 ### Notes:
 
 
