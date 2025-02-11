@@ -1,5 +1,7 @@
 # JSON objects
 
+Here are the types of objects this project works with. These are grounded on the fundamentals of posting weather alerts for a location. 
+
 ### Rain intensity report
 
 ```json
@@ -42,3 +44,30 @@
 	}
 }
 ```
+
+# POCs
+
+## Basestation to Bluesky
+
+### Goal
+A simple command-line Python script that takes a message and posts its contents to Bluesky. 
+
+```python
+post_to_bluesky.py -message "example_msg.yaml" -settings "settings.yaml"
+```
+*Example message*:
+
+A simple YAML file path is passed into the script and that YAML object includes a `message` attribute that is passed to the Bluesky API. Everything in this Bluesky should be treated as public data. 
+
+```yaml
+message: "Red Rocks Park 30-day rain total: 0.71 inches #RainData #30Day #COWx #MHFD"
+created_by: "Base station"
+created_at: "2024-07-05T17:30:00+00:00" 
+sent_at: "" 
+channel_host: "bluesky"
+```
+It can handle multiple files and can be set up to monitor a folder and trigger a post for each. 
+
+### Notes:
+
+
