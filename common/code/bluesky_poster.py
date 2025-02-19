@@ -1,4 +1,4 @@
-from .bluesky_facets import parse_facets
+from bluesky_facets import parse_facets
 import os
 import sys
 import re
