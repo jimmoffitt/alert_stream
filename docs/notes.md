@@ -64,7 +64,8 @@ message: "Red Rocks Park 30-day rain total: 0.71 inches #RainData #30Day #COWx #
 created_by: "Base station"
 created_at: "2024-07-05T17:30:00+00:00" 
 sent_at: "" 
-channel_host: "bluesky"
+host: "lfsd.org"
+target_channel: "bluesky"
 ```
 It can handle multiple files and can be set up to monitor a folder and trigger a post for each. 
 
@@ -75,6 +76,12 @@ It can handle multiple files and can be set up to monitor a folder and trigger a
 A simple command-line Python script that continuously monitors a folder for new files, and when one is found, it is posted to Bluesky.
 
 
-### Notes:
+## Notes:
 
 
+### Configuration 
+
+Still working out the details, splitting settings into three types:
+* Environment variables: Private (not shared) credentials, keys, secrets, etc.
+* Shared app configurations: Things like the check interval, paths, etc.
+* Things that users may want to change on the fly for testing and now convinience. There may be a `verbose` flag for debugging purposes.
