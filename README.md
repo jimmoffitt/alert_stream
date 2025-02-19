@@ -16,17 +16,40 @@ target_channel: "bluesky"
 ```
 ![An example Bluesky post](docs/images/bluesky_post.png) 
 
+## Running script
+
 If your alert message files are written to the default `./inbox/` folder, you can call this script from the command line like so:
 ```bash
     python3 check_alerts.py
 ```
 
-You can also specify an alternate inbox path (default is `./inbox`) and set verbose mode (`--verbose`).
-```bash
-    python3 check_alerts.py --inbox /path/to/your/inbox --verbose
-```    
+## Script options
 
-Running script with arguments:
+This script supports the following settings:
+* `ALERT_CHECK_INTERVAL`: How often to check for new alerts (in minutes). Default is 5.
+* `INBOX_ROOT`: Path to the directory where alert messages are stored. Default is `./inbox`.
+* `VERBOSE`: Whether to print additional information during execution. Default is False.
+
+These can be set in a `settings.yaml` file or passed as command-line arguments. The scripts will first load the `settings.yaml` file and then override those values with any command line arguments.
+
+### `settings.yaml` file
+
+The script options can be set in a local `settings.yaml` file located at the same level as the Python script. Here's how it looks: 
+```yaml
+ALERT_CHECK_INTERVAL: 5
+INBOX_ROOT: ./inbox/
+VERBOSE: false
+```  
+
+### Command line options
+
+These attributes can also be specified with command line options. For instance, to set the interval to 1 minute and enable verbose output, you would use:
 ```bash
-python3 check_alerts.py --inbox /path/to/your/inbox --verbose
-```
+    python3 check_alerts.py --interval 1 --verbose
+``` 
+
+To see all available command line options, simply run the script without any arguments:
+```bash
+    python3 check_alerts.py -h
+``` 
+
