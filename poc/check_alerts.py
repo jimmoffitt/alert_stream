@@ -1,24 +1,77 @@
+import sys
 import os
+from pathlib import Path
+
+# Get the directory of the current script
+script_dir = Path(__file__).parent.resolve()
+
+# Construct the path to the 'common/code' directory
+common_code_dir = script_dir.parent / "common" / "code"
+
+# Add the 'common/code' directory to the Python path
+sys.path.append(str(common_code_dir))
+
+# Now you can import the BlueskyPoster class
+from bluesky_poster import BlueskyPoster
+
 import time
 import yaml
 from dotenv import load_dotenv
+import argparse
 from pathlib import Path
 from datetime import datetime
-from BlueskyPoster import BlueskyPoster
 
 # Load configuration from .env.local file
 load_dotenv(".env.local")
 
-config = {
-    "ALERT_CHECK_INTERVAL": int(os.getenv("ALERT_CHECK_INTERVAL", 5)),  # Default to 5 seconds
-    "INBOX_ROOT": os.getenv("INBOX_ROOT", "inbox")
-}
+# --- Argument parsing ---
+parser = argparse.ArgumentParser(description="Process messages and post them to Bluesky")
+parser.add_argument("--inbox", help="Path to the inbox folder")
+parser.add_argument("--interval", type=int, help="Alert check interval in seconds")
+parser.add_argument("--verbose", action="store_true", help="Enable verbose output")
+args = parser.parse_args()
+# --- End argument parsing ---
+
+# Configuration from environment variables and command-line arguments
+# Example of pulling setting from env vars:
+#ALERT_CHECK_INTERVAL = int(os.getenv("ALERT_CHECK_INTERVAL", 5))
+
+# Example of pulling settings from command line arguments:
+#ALERT_CHECK_INTERVAL = args.alert_check_interval
+
+# Example of reading from a local settings.yaml file: 
+settings_path = script_dir / 'settings.yaml'
+with open(settings_path, 'r') as f:
+    config = yaml.safe_load(f)
+    print(config)
+    print(config['ALERT_CHECK_INTERVAL'])
+
+
+
+# --- Override settings with command-line arguments ---
+if args.inbox:
+    config["INBOX_ROOT"] = args.inbox
+if args.interval:
+    config["ALERT_CHECK_INTERVAL"] = args.interval
+if args.verbose:
+    config["VERBOSE"] = args.verbose
+
+# --- Set defaults if not provided ---
+if "INBOX_ROOT" not in config:
+    config["INBOX_ROOT"] = "./inbox"
+if "ALERT_CHECK_INTERVAL" not in config:
+    config["ALERT_CHECK_INTERVAL"] = 5
+if "VERBOSE" not in config:
+    config["VERBOSE"] = False
+
+ALERT_CHECK_INTERVAL = int(config['ALERT_CHECK_INTERVAL'])
 
 # Ensure necessary subfolders exist
 INBOX_PATH = Path(config["INBOX_ROOT"])
 FAILED_PATH = INBOX_PATH / "failed"
 SENT_PATH = INBOX_PATH / "sent"
 
+# Create folders if they don't exist
 for path in [INBOX_PATH, FAILED_PATH, SENT_PATH]:
     path.mkdir(parents=True, exist_ok=True)
 
@@ -80,6 +133,8 @@ def main():
 
 if __name__ == "__main__":
     try:
+        if args.verbose:
+            print("Verbose output enabled")
         main()
     except KeyboardInterrupt:
         print("Process interrupted by user.")
