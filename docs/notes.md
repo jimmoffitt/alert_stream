@@ -5,7 +5,9 @@ Here are the types of objects this project works with. These are grounded on the
 ### Rain intensity report
 
 ```json
-{   "key":"",
+{   "site_key":"",
+    "site_id": 2100,
+    "sensor_id": 2150,
     "received_time": "",
     "created_at": "",
     "rain": {
@@ -27,12 +29,14 @@ Here are the types of objects this project works with. These are grounded on the
 ### Location metadata
 ```json
 {
-	"key": "",
+	"site_key": "redrocks-co-us-3e128hg38th5620",
 	"properties": {
 		"name": "Red Rocks amphitheater",
 		"lat": 0,
 		"long": 0,
-		"state": "CO",
+	        "city": "Morrison",
+		"state_code": "CO",               
+	        "country_code": "US",
 		"timezone": "US-Mountain",
 		"utc_offset_std": -7,
 		"host": "",
