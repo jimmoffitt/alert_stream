@@ -1,10 +1,12 @@
 {
-	"key": "",
+	"site_key": "redrocks-co-us-3e128hg38th5620",
 	"properties": {
 		"name": "Red Rocks amphitheater",
 		"lat": 0,
 		"long": 0,
-		"state": "CO",
+	        "city": "Morrison",
+		"state_code": "CO",               
+	        "country_code": "US",
 		"timezone": "US-Mountain",
 		"utc_offset_std": -7,
 		"host": "",
