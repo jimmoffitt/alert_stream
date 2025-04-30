@@ -24,14 +24,16 @@ tags:
 ```
 ![An example Bluesky post](docs/images/bluesky_post.png) 
 
-## Running script
+## Running scripts
 
-If your alert message files are written to the default `./inbox/` folder, you can call this script from the command line like so:
-```bash
-    python3 check_alerts.py
-```
+Currently, there are these scripts:
+
+* `./scripts/trigger_notify.py`
+* `./poc/check_alerts.py`
 
 ## Script options
+
+More details for the `./poc/check_alerts.py` script... 
 
 This script supports the following settings:
 * `ALERT_CHECK_INTERVAL`: How often to check for new alerts (in minutes). Default is 5.
