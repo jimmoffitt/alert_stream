@@ -183,13 +183,13 @@ class BlueskyPoster:
         #message = message + "\n" + mentions
 
         # TODO: tack on some configured tags
-        tag0 = "RainData"
-        tag1 = "30Day" 
-        tag2 = "COWx"
-        tag3 = "Host"
-        tags = f"#{tag0} #{tag1} #{tag2} #{tag3}"        
+        #tag0 = "RainData"
+        #tag1 = "30Day" 
+        #tag2 = "COWx"
+        #tag3 = "Host"
+        #tags = f"#{tag0} #{tag1} #{tag2} #{tag3}"        
         
-        message = message + "\n" + tags
+        message = message + "\n" #+ tags
 
         # Check if the long addendum fits within the character limit
         if len(message + long_addendum) <= 300:
@@ -214,8 +214,7 @@ class BlueskyPoster:
 
         #config['accessJwt'] = bsky_session["accessJwt"]
         #config['did'] = bsky_session["did"]
-
-        message= self.manage_bluesky_message_length(message)
+        #message= self.manage_bluesky_message_length(message)
 
         # trailing "Z" is preferred over "+00:00"
         now = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
@@ -282,15 +281,17 @@ async def main():
         
     # Create an instance of BlueskyPoster
     bluesky_poster = BlueskyPoster(config['pds_url'], config['handle'], config['password'])  # Assuming the constructor takes these arguments
-    
 
     async with aiohttp.ClientSession() as session:
         tasks = []
-        for item in data:
+        """ for item in data:
             # ... (prepare config and message metadata)
             if item['id'] == id:
                 message = item
-                break
+                 
+                break """
+
+        message = "This is a test. This is only a test. "
 
         task = asyncio.create_task(
             #poster.create_post_async(config, message, httpsession)  # Pass the session

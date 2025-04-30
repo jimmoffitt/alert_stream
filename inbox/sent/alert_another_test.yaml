@@ -1,0 +1,16 @@
+message: 'Another test of the Bluesky communication system...'
+created_by: Some backend base station
+created_at: 'YYYY-MM-DD HH:mm:ss'
+site_uuid: 1
+host: Fictional.wx
+host_site_id: 1
+host_sensor_id: 1
+trigger_type: file
+target_channels: bluesky
+site_lat: 0
+site_long: 0
+tags:
+  - BlueskyAPI
+  - Testing
+  - EarlyWarningSystems
+  

@@ -1,0 +1,16 @@
+message: 'Red Rocks Park 30-day rain total: 0.71 inches'
+created_by: Base station SW 2.04
+created_at: '2025-04-30T17:30:07+07:00' 
+site_uuid: 1
+host: Test
+host_site_id: 2500
+host_sensor_id: 2500
+trigger_type: file
+target_channels: bluesky
+site_lat: 39.39.55
+site_long: -105.12.18
+tags:
+  - COWx
+  - Rain
+  - RedRocks
+  - RedRocksWx
