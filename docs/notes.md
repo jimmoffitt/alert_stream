@@ -5,7 +5,9 @@ Here are the types of objects this project works with. These are grounded on the
 ### Rain intensity report
 
 ```json
-{   "key":"",
+{   "site_key":"",
+    "site_id": 2100,
+    "sensor_id": 2150,
     "received_time": "",
     "created_at": "",
     "rain": {
@@ -27,12 +29,14 @@ Here are the types of objects this project works with. These are grounded on the
 ### Location metadata
 ```json
 {
-	"key": "",
+	"site_key": "redrocks-co-us-3e128hg38th5620",
 	"properties": {
 		"name": "Red Rocks amphitheater",
 		"lat": 0,
 		"long": 0,
-		"state": "CO",
+	        "city": "Morrison",
+		"state_code": "CO",               
+	        "country_code": "US",
 		"timezone": "US-Mountain",
 		"utc_offset_std": -7,
 		"host": "",
@@ -57,7 +61,7 @@ post_to_bluesky.py -message "example_msg.yaml" -settings "settings.yaml"
 ```
 *Example message*:
 
-A simple YAML file path is passed into the script and that YAML object includes a `message` attribute that is passed to the Bluesky API. Everything in this Bluesky should be treated as public data. 
+A simple YAML file path is passed into the script and that YAML object includes a `message` attribute that is passed to the Bluesky API. Everything in this message object should be treated as public data. 
 
 ```yaml
 message: "Red Rocks Park 30-day rain total: 0.71 inches #RainData #30Day #COWx #MHFD"
@@ -92,7 +96,5 @@ Currently, the BlueskyPoster class assumes there is a local .env.local with thes
     BLUESKY_PDS_URL = os.getenv("BLUESKY_PDS_URL")
 ```
 
-
-
 * Shared app configurations: Things like the check interval, paths, etc.
-* Things that users may want to change on the fly for testing and now convinience. There may be a `verbose` flag for debugging purposes.
+* Things that users may want to change on the fly for testing and convenience. There may be a `verbose` flag for debugging purposes.

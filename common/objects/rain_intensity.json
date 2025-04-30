@@ -1,4 +1,6 @@
-{   "key":"",
+{   "site_key":"",
+    "site_id": 2100,
+    "sensor_id": 2150,
     "received_time": "",
     "created_at": "",
     "rain": {
