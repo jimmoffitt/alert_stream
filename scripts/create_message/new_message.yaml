@@ -1,0 +1,16 @@
+message: 'Test message'
+created_by: Base station SW 2.04
+created_at: '' 
+site_uuid: 1
+host: Test
+host_site_id: 1000
+host_sensor_id: 1000
+trigger_type: file
+target_channels: bluesky
+site_lat: 39:39:55
+site_long: -105:12:18
+tags:
+  - tag1
+  - tag2
+  - tag3
+  - tag4

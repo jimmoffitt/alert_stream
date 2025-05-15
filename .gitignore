@@ -1,3 +1,12 @@
 poc/.env.local
 .env.local
+venv
+venv
+env
+*/.venv
+*/venv
+*/env
+__pycache__/
+*.pyc
+*.pyo
 
