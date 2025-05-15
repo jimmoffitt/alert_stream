@@ -63,3 +63,24 @@ To see all available command line options, simply run the script without any arg
     python3 check_alerts.py -h
 ``` 
 
+## Notes
+
+Creating the `message` table:
+
+```sql
+create table message (
+  id serial primary key,
+  message text not null,
+  created_by text not null,
+  created_at timestamp not null,
+  site_uuid integer,
+  host text,
+  host_site_id integer,
+  host_sensor_id integer,
+  trigger_type text,
+  target_channels text,
+  site_lat double precision,
+  site_long double precision,
+  tags text[]
+);
+```
