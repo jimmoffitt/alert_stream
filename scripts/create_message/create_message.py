@@ -1,5 +1,6 @@
 import os
 import yaml
+import argparse
 from pathlib import Path
 from dotenv import load_dotenv
 from datetime import datetime, timezone
@@ -102,7 +103,7 @@ def write_yaml_file(data, directory=OUTBOX_FOLDER, archive=True):
         shutil.copy2(file_path, archived_path)
         logging.info(f"Archived copy written to {archived_path}")
 
-def main():
+def main(write_file=False, write_db=False):
     try:
         message_data = load_new_message()
         message_data['created_at'] = datetime.now(timezone.utc)  # Set runtime timestamp
@@ -111,12 +112,29 @@ def main():
             logging.info("No new message written; duplicate detected in archive.")
             return
 
-        with psycopg.connect(**DB_CONFIG) as conn:
-            insert_message(conn, message_data)
+        if write_db:
+            with psycopg.connect(**DB_CONFIG) as conn:
+                insert_message(conn, message_data)
+                logging.info("Message written to database.")
+
+        if write_file:
             write_yaml_file(message_data)
-            logging.info("Message written to database and outbox.")
+            logging.info("Message written to outbox.")
+
+        if not write_file and not write_db:
+            logging.warning("No action taken. Use -file and/or -db to specify output targets.")
+
     except Exception as e:
         logging.error(f"Error: {e}")
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser(description="Create and dispatch an alert message.")
+    parser.add_argument('-file', action='store_true', help='Write message to a YAML file in outbox')
+    parser.add_argument('-db', action='store_true', help='Insert message into the database')
+    args = parser.parse_args()
+
+    # If neither is specified, default to writing to file only
+    if not args.file and not args.db:
+        main(write_file=True, write_db=False)
+    else:
+        main(write_file=args.file, write_db=args.db)
