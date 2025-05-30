@@ -4,17 +4,44 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
         {
-            "name": "Python Debugger: Current File with Arguments",
-            "type": "debugpy",
+            "name": "Python: write to file by default",
+            "type": "python",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "args": [
-                "-file",
-                "-db"
-            ]
+            "justMyCode": true,
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Python: write to file (--file)",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "args": ["--db"],
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Python: write to database (--db)",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "args": ["--db"],
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Python: Write to both (--file --db)",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "args": ["--file", "--db"],
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "cwd": "${workspaceFolder}"
         }
     ]
 }
