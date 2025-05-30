@@ -30,3 +30,47 @@ ARCHIVE_FOLDER = script_dir / 'archive'      # now local to the script folder
 ```bash
 >python3 create_message.py --file --db
 ```
+## **Alert** message object
+
+Here is an example of a `message` object and its attributes. Some of these are parsed and arranged for public messages. When these are written to a database, by default, they are written to a `message` table with these same attributes as fields. 
+
+```yaml
+message: 'Building an example for the repo's README. '
+created_by: someone writing code
+created_at: 2025-05-30 04:18:54.396106+00:00
+site_uuid: 1
+host: Test
+host_site_id: 100
+host_sensor_id: 100
+trigger_type: file
+target_channels: bluesky
+site_lat: 142795
+site_long: -378738
+tags:
+- development
+- testing
+- API
+```
+
+Here is the SQL command for creating the corresponding database table: 
+
+```sql
+create table message (
+  id serial primary key,
+  message text not null,
+  created_by text not null,
+  created_at timestamp not null,
+  site_uuid integer,
+  host text,
+  host_site_id integer,
+  host_sensor_id integer,
+  trigger_type text,
+  target_channels text,
+  site_lat double precision,
+  site_long double precision,
+  tags text[]
+);
+
+```
+
+```
